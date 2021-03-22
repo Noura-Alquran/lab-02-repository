@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Patrick Hand', cursive;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(210, 220, 223);
+    text-align: center;
+   
+
+}
+footer{
+    clear: both;
+    font-size:30px;
+    text-align: center;
+    height: 50px;
+    background-color: antiquewhite;
+}
