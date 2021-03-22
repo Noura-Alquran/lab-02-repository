@@ -1,34 +1,31 @@
 # lab-02-repository
 
-* Feature #1: Display images
-Number and name of feature: ________________________________
+* Feature #1: Display images 
+**view some images on the one page to browse the photo collection.by using AJAX, specifically $.ajax(), to read the provided JSON file. Each object should become a new instance of a *constructor function*.And using jQuery to make a copy of the HTML template of the photo component**
+Estimate of time needed to complete: 40 min
 
-Estimate of time needed to complete: _____
+Start time:2:15 pm
 
-Start time: _____
+Finish time:3:40 pm
 
-Finish time: _____
-
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5 hour because I faced some problems
 
 * Feature #2: Filter images
-Number and name of feature: ________________________________
+**filter the images and view only images that match a keyword**
+Estimate of time needed to complete: 30 min
 
-Estimate of time needed to complete: _____
+Start time: 4:00pm
 
-Start time: _____
+Finish time:4:45pm
 
-Finish time: _____
-
-Actual time needed to complete: _____
+Actual time needed to complete: 45 min
 
 * Feature #3: Style the application
-Number and name of feature: ________________________________
+Estimate of time needed to complete: 2 hour
 
-Estimate of time needed to complete: _____
+Start time: 5:00pm
 
-Start time: _____
+Finish time: 7:00 pm
 
-Finish time: _____
+Actual time needed to complete:2 hour 
 
-Actual time needed to complete: _____
