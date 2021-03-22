@@ -1,0 +1,32 @@
+h1{
+    font-family: 'Patrick Hand', cursive;
+    font-size: 62px; 
+    text-align: center;
+    background-color: antiquewhite;
+    height: fit-content;
+
+}
+h2{
+    font-size: 20px;
+    background-color: rgb(177, 173, 173);
+    width: 200px;
+}
+select{
+    text-align: center;
+    font-size:25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 14px;
+    background-color: rgb(184, 188, 189);
+
+    }
+img{
+    width: 200px;
+    height: 200px;
+    /* float: left;     */
+}
+p{
+    font-size: medium;
+    width: 200px;
+}
