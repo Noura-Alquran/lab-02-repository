@@ -1,15 +1,15 @@
-main{
-    width: 710px;
-    height: 1000px;
-    /* margin-left: auto; */
-    margin-right: auto;
-    margin-left: 500px;
+main{ 
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    margin-left: 100px;
+    /* flex-grow: inherit; */
+    flex-grow: 1;      
+    flex-shrink: 0;    
+    display: flex;
+    padding: 0%;
+    margin-top: 0%;
 }
 section{
-    margin: auto;
-}
-div{
-    display: inline-block;
-    float: left;
-    margin: 35px;
+    margin:30px;
 }

@@ -1,10 +1,11 @@
 h1{
     font-family: 'Patrick Hand', cursive;
-    font-size: 62px; 
-    text-align: center;
+    font-size: 60px;
+    text-align: center; 
     background-color: antiquewhite;
-    height: fit-content;
-
+    height: 75px;
+    display: flex;
+    justify-content: center;
 }
 h2{
     font-size: 20px;
@@ -24,9 +25,27 @@ select{
 img{
     width: 200px;
     height: 200px;
-    /* float: left;     */
+    align-self:center;
 }
 p{
     font-size: medium;
     width: 200px;
+    height: 70px;
+}
+.page{
+font-size:x-large;
+background-color: lightblue;
+margin-top: 20px;
+
+}
+#photo-template {
+    display: inherit;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+fieldset{
+font-family: 'Patrick Hand', cursive;
+font-size: 20px;
+margin: 10px ;
 }
