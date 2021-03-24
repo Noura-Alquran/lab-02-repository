@@ -29,3 +29,39 @@ Finish time: 7:00 pm
 
 Actual time needed to complete:2 hour 
 
+# Lab-03
+* Feature 1: Pagination
+Estimate of time needed to complete: 1:30 hour
+
+Start time: 2:00pm
+
+Finish time:4:05pm
+
+Actual time needed to complete: 2 hour
+
+* Feature 2: Templating
+Estimate of time needed to complete: 1:30 hour
+
+Start time: 4:00pm
+
+Finish time:10:00pm
+
+Actual time needed to complete: 6 hour because I faced alot of problems.
+
+* Feature 3: Styling with Flexbox
+Estimate of time needed to complete: 1:30 hour
+
+Start time: 10:00pm
+
+Finish time:11:30pm
+
+Actual time needed to complete:1 hour 
+
+* Feature 4: Sort the images
+Estimate of time needed to complete: 1 hour
+
+Start time: 12:00am
+
+Finish time:1:30 am
+
+Actual time needed to complete: 1:30 hour

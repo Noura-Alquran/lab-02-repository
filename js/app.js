@@ -1,5 +1,9 @@
 'use strict';
 
+let arrayOfObjects=[]; 
+let pageOne=[];
+let pageTwo=[];
+
 const ajaxSettings = {
     method: "get",
     dataType: "json",
@@ -7,71 +11,145 @@ const ajaxSettings = {
   
 $.ajax("data/page-1.json", ajaxSettings).then((arr) => {
     arr.forEach((horn) => {
-  let hornimg=new newHorn(horn).render();
-
+  pageOne.push(new NewHorn(horn));
+  
 })
-  checkkeywords();
+let keywordarrayOne=[];
+
+pageOne.forEach(horn=>{
+  horn.renderhorn();
+  if(!keywordarrayOne.includes(horn.keyword)){
+    keywordarrayOne.push(horn.keyword);
+   
+    $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+    }
+    
+  })
+if ($("input[name='sorting']:checked").val() == 'sortTitle') {
+    $('section').remove();
+    sortHornsByTitle(pageOne);
+  }
+  $('input:radio[name=sorting]:checked').is(function () {
+    if ($("input[name='sorting']:checked").val() == 'sortNum') {
+      $('section').remove();
+      sortHornsByNum(pageOne);
+    }    })
+});
+$.ajax("data/page-2.json", ajaxSettings).then((arr) => {
+  arr.forEach((horn) => {
+pageTwo.push(new NewHorn(horn));
+})
 });
 
-let arrayOfObjects=[]; 
+$("#butOne").click(function(){ 
+  $('section').remove();
+  let keywordarrayOne=[];
+  pageTwo.forEach(horn=>{
+    $('select').children(`option[value=${horn.keyword}]`).hide();
 
-function newHorn (horn){
+  })
+  pageOne.forEach(horn=>{
+    horn.renderhorn();
+    if(!keywordarrayOne.includes(horn.keyword)){
+      keywordarrayOne.push(horn.keyword);
+     
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+      }
+  });
+  $('input:radio[name=sorting]:checked').is(function () {
+    if ($("input[name='sorting']:checked").val() == 'sortTitle') {
+      $('section').remove();
+      sortHornsByTitle(pageOne);
+    }
+    if ($("input[name='sorting']:checked").val() == 'sortNum') {
+      $('section').remove();
+      sortHornsByNum(pageOne);
+    }    })
+  });
+
+$("#butTwo").on('click',function(){ 
+  $('section').remove();
+  let keywordarrayTwo=[];
+  $('option').hide();
+  pageTwo.forEach(horn=>{
+    horn.renderhorn();
+    if(!keywordarrayTwo.includes(horn.keyword)){
+      keywordarrayTwo.push(horn.keyword);
+      $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
+      }
+ 
+  });
+  $('input:radio[name=sorting]:checked').is(function () {
+    if ($("input[name='sorting']:checked").val() == 'sortTitle') {
+      $('section').remove();
+      sortHornsByTitle(pageTwo);
+    }
+    if ($("input[name='sorting']:checked").val() == 'sortNum') {
+      $('section').remove();
+      sortHornsByNum(pageTwo);
+    }    })
+  
+
+})
+
+function NewHorn (horn){
 this.image_url=horn.image_url;
 this.title=horn.title;
 this.description=horn.description;
 this.keyword=horn.keyword;
 this.horns=horn.horns;
 arrayOfObjects.push(this);
-
 }
-console.log(arrayOfObjects);
-newHorn.prototype.render = function () {
 
-    let clonedDiv = $("#photo-template").html();
-    let newSection = $('<section></section>').html(clonedDiv);
-    let newOption = $('<option></option>');
-    newSection.find("h2").text(this.title);
-    newSection.find("img").attr("src", this.image_url);
-    newSection.find("p").text(`${this.description} , horns num is ${this.horns}`);
-    newSection.attr("class", this.keyword); 
-    $("main").append(newSection); 
-    
-  };
-
-let keywordarray=[];
-
-function checkkeywords(arr){
-    arrayOfObjects.forEach(element=>{
-      if(!keywordarray.includes(element.keyword)){
-      keywordarray.push(element.keyword);
-      $('select').append('<option value ='+ element.keyword + '>'+ element.keyword +'</option>');
-      }
-    })
+NewHorn.prototype.renderhorn=function(){
+  let template= $("#photo-template").html();
+  let html = Mustache.render(template,this);
+  $("main").append(html); 
 }
-console.log(keywordarray);
+
+arrayOfObjects.forEach(horn=>{
+  $('section').attr("class", horn.keyword); 
+});
 
 $('select').on('change', handleFilter);
 
 function handleFilter (event){
     event.preventDefault();
-    $('section').hide();
-    let filter=[];
+    $('section').remove();
+    $("#photo-template").html();
     let selectedValue = $('option:selected').val();
+
     arrayOfObjects.forEach(element => {
           if (selectedValue === element.keyword){
-              console.log(selectedValue);
-            filter.push(element);
-            console.log(filter);
-           $("."+selectedValue).show();
-            
+           element.renderhorn();
+ 
           }
          }
-    )
+    )}
  
+
+function sortHornsByTitle(array) {
+ array.sort((a,b)=>{
+  if (a.title<b.title){
+      return -1;
+  }else if (a.title>b.title){
+      return 1;
+  }
+  else {
+      return 0;
+  }
+ })
+ array.forEach(horn=>{
+   horn.renderhorn();
+ })
 }
 
-
-
-
-
-
+function sortHornsByNum(array) {
+  
+  array.sort((a,b)=>{
+    return b.horns - a.horns ;
+     
+    })
+  array.forEach(horn=>{
+      horn.renderhorn();})
+};
