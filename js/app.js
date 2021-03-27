@@ -1,6 +1,6 @@
 'use strict';
 
-let arrayOfObjects=[]; 
+let arrayOfCurrentObjects=[]; 
 let pageOne=[];
 let pageTwo=[];
 
@@ -15,26 +15,35 @@ $.ajax("data/page-1.json", ajaxSettings).then((arr) => {
   
 })
 let keywordarrayOne=[];
-
 pageOne.forEach(horn=>{
   horn.renderhorn();
+  arrayOfCurrentObjects.push(horn);
   if(!keywordarrayOne.includes(horn.keyword)){
     keywordarrayOne.push(horn.keyword);
    
     $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
     }
-    
+   
   })
-if ($("input[name='sorting']:checked").val() == 'sortTitle') {
-    $('section').remove();
-    sortHornsByTitle(pageOne);
-  }
   $('input:radio[name=sorting]:checked').is(function () {
-    if ($("input[name='sorting']:checked").val() == 'sortNum') {
-      $('section').remove();
-      sortHornsByNum(pageOne);
-    }    })
-});
+      if ($("input[name='sorting']:checked").val() == 'sortTitle') {
+        $('section').remove();
+        sortHornsByTitle(arrayOfCurrentObjects);
+      }
+    });
+  $('input:radio[name=sorting]').click(function () {
+        if($(this).val()=='sortTitle'){
+           $('section').remove();
+        sortHornsByTitle(arrayOfCurrentObjects); 
+      }
+      else {
+         $('section').remove();
+        sortHornsByNum(arrayOfCurrentObjects);
+      }
+      
+      
+     
+}); });
 $.ajax("data/page-2.json", ajaxSettings).then((arr) => {
   arr.forEach((horn) => {
 pageTwo.push(new NewHorn(horn));
@@ -48,47 +57,42 @@ $("#butOne").click(function(){
     $('select').children(`option[value=${horn.keyword}]`).hide();
 
   })
+  arrayOfCurrentObjects=[];
   pageOne.forEach(horn=>{
-    horn.renderhorn();
+   arrayOfCurrentObjects.push(horn); 
+   horn.renderhorn();
     if(!keywordarrayOne.includes(horn.keyword)){
       keywordarrayOne.push(horn.keyword);
      
       $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
       }
+      
+      
   });
-  $('input:radio[name=sorting]:checked').is(function () {
-    if ($("input[name='sorting']:checked").val() == 'sortTitle') {
-      $('section').remove();
-      sortHornsByTitle(pageOne);
-    }
-    if ($("input[name='sorting']:checked").val() == 'sortNum') {
-      $('section').remove();
-      sortHornsByNum(pageOne);
-    }    })
+ 
   });
 
 $("#butTwo").on('click',function(){ 
   $('section').remove();
   let keywordarrayTwo=[];
   $('option').hide();
-  pageTwo.forEach(horn=>{
+   arrayOfCurrentObjects=[];
+   pageTwo.forEach(horn=>{
     horn.renderhorn();
-    if(!keywordarrayTwo.includes(horn.keyword)){
+     arrayOfCurrentObjects.push(horn);
+     if(!keywordarrayTwo.includes(horn.keyword)){
       keywordarrayTwo.push(horn.keyword);
       $('select').append('<option value ='+ horn.keyword + '>'+ horn.keyword +'</option>');
       }
- 
+     
+     
   });
   $('input:radio[name=sorting]:checked').is(function () {
     if ($("input[name='sorting']:checked").val() == 'sortTitle') {
       $('section').remove();
-      sortHornsByTitle(pageTwo);
+      sortHornsByTitle(arrayOfCurrentObjects);
     }
-    if ($("input[name='sorting']:checked").val() == 'sortNum') {
-      $('section').remove();
-      sortHornsByNum(pageTwo);
-    }    })
-  
+  });
 
 })
 
@@ -98,7 +102,7 @@ this.title=horn.title;
 this.description=horn.description;
 this.keyword=horn.keyword;
 this.horns=horn.horns;
-arrayOfObjects.push(this);
+// arrayOfObjects.push(this);
 }
 
 NewHorn.prototype.renderhorn=function(){
@@ -107,7 +111,7 @@ NewHorn.prototype.renderhorn=function(){
   $("main").append(html); 
 }
 
-arrayOfObjects.forEach(horn=>{
+arrayOfCurrentObjects.forEach(horn=>{
   $('section').attr("class", horn.keyword); 
 });
 
@@ -119,7 +123,7 @@ function handleFilter (event){
     $("#photo-template").html();
     let selectedValue = $('option:selected').val();
 
-    arrayOfObjects.forEach(element => {
+    arrayOfCurrentObjects.forEach(element => {
           if (selectedValue === element.keyword){
            element.renderhorn();
  
@@ -142,6 +146,7 @@ function sortHornsByTitle(array) {
  array.forEach(horn=>{
    horn.renderhorn();
  })
+
 }
 
 function sortHornsByNum(array) {
@@ -153,3 +158,4 @@ function sortHornsByNum(array) {
   array.forEach(horn=>{
       horn.renderhorn();})
 };
+
